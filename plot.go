@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"image/color"
 	"log"
+	"math"
 	"os/exec"
 	"runtime"
 	"sort"
@@ -23,13 +24,26 @@ func (a *Analyzer) PlotHistogram(file string) error {
 
 	sort.Float64s(data)
 
+	// calculate bins (it's small number so we're good with this approach)
+	min, max := math.MaxInt64, 0
+	for _, value := range data {
+		v := int(value)
+		if v > max {
+			max = v
+		}
+		if v < min {
+			min = v
+		}
+	}
+	bins := max - min
+
 	// plot
 	p, err := plot.New()
 	if err != nil {
 		log.Panic(err)
 	}
 	p.Title.Text = "'if err =' count per function"
-	h, err := plotter.NewHist(data, 10)
+	h, err := plotter.NewHist(data, bins)
 	if err != nil {
 		return fmt.Errorf("create histogram: %v", err)
 	}
