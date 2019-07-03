@@ -1,3 +1,4 @@
 *.png
+!demo/demo.png
 *.txt
 errfreq

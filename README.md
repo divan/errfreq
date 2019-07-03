@@ -4,6 +4,8 @@ This tool takes Go package as an input and counts number of `if err !=` checks i
 
 Output is either raw numbers (for analysis/plotting in other software) or a histogram plot in PNG format.
 
+![demo](./demo/demo.png)
+
 ## Install
 
 ```
