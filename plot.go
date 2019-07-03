@@ -50,6 +50,8 @@ func (a *Analyzer) PlotHistogram(file string) error {
 	h.Color = color.RGBA{255, 255, 255, 255}
 	h.FillColor = plotutil.Color(2)
 
+	h.Normalize(100)
+
 	p.Add(h)
 
 	stylePlot(p)
@@ -67,6 +69,7 @@ func (a *Analyzer) PlotHistogram(file string) error {
 func stylePlot(p *plot.Plot) {
 	p.Title.Font.SetName("Helvetica")
 	p.Title.Font.Size = vg.Points(42)
+	p.Title.Padding = vg.Points(100)
 
 	p.X.Label.Text = "number of err checks"
 	p.X.Padding = vg.Points(10)
@@ -76,8 +79,7 @@ func stylePlot(p *plot.Plot) {
 	p.X.Tick.Label.Font.SetName("Helvetica")
 	p.X.Tick.Label.Font.Size = vg.Points(24)
 
-	p.Y.Label.Text = "Frequency"
-	p.X.Padding = vg.Points(30)
+	p.Y.Label.Text = "Percent (%)"
 	p.Y.Tick.Marker = plot.DefaultTicks{}
 	p.Y.Label.Font.SetName("Helvetica")
 	p.Y.Label.Font.Size = vg.Points(32)
